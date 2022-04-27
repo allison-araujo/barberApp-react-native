@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components/native';
 
 const InputArea = styled.View`
@@ -10,7 +11,20 @@ const InputArea = styled.View`
   align-items: center;
   margin-bottom: 15px;
 `;
+const Input = styled.TextInput`
+  flex: 1;
+  font-size: 16px;
+  color: #268596;
+  margin-left: 10px;
+`;
 
-export default () => {
-  return <InputArea></InputArea>;
+export default ({IconSvg, placeholder}) => {
+  return (
+    <>
+      <InputArea>
+        <IconSvg width="25" heigth="25" fill="#268596" />
+        <Input placeholder={placeholder} placeholderTextColor="#268596" />
+      </InputArea>
+    </>
+  );
 };
