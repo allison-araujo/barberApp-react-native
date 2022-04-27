@@ -1,5 +1,7 @@
 import React from 'react';
 import Barber from '../../assets/barber.svg';
+import EmailIcon from '../../assets/email.svg';
+import LockIcon from '../../assets/lock.svg';
 import SignInput from '../../components/SignInput';
 import {
   Container,
@@ -16,9 +18,9 @@ export default () => {
     <Container>
       <Barber width="100%" heigth="160" />
       <InputArea>
-        <SignInput />
+        <SignInput IconSvg={EmailIcon} placeholder="Digite seu email:" />
 
-        <SignInput />
+        <SignInput IconSvg={LockIcon} placeholder="Digite sua Senha:" />
 
         <CustomButton>
           <CustomButtonText>Login</CustomButtonText>
