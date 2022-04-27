@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import Barber from '../../assets/barber.svg';
 import EmailIcon from '../../assets/email.svg';
@@ -16,6 +17,17 @@ import {
 export default () => {
   const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
+
+  const navigation = useNavigation();
+
+  const handleSignClick = () => {};
+
+  const handleMessageButtonClick = () => {
+    navigation.reset({
+      routes: [{name: 'SignUp'}],
+    });
+  };
+
   return (
     <Container>
       <Barber width="100%" heigth="160" />
@@ -35,11 +47,11 @@ export default () => {
           password={true}
         />
 
-        <CustomButton>
+        <CustomButton onPress={handleSignClick}>
           <CustomButtonText>Login</CustomButtonText>
         </CustomButton>
       </InputArea>
-      <SignMessageButton>
+      <SignMessageButton onPress={handleMessageButtonClick}>
         <SignMessageButtonText>
           Ainda nao possui uma conta?
         </SignMessageButtonText>
