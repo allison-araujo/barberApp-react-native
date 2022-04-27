@@ -1,5 +1,6 @@
 import React from 'react';
 import Barber from '../../assets/barber.svg';
+import SignInput from '../../components/SignInput';
 import {
   Container,
   CustomButton,
@@ -9,13 +10,16 @@ import {
   SignMessageButtonText,
   SignMessageButtonTextBold,
 } from './styles';
+
 export default () => {
   return (
     <Container>
       <Barber width="100%" heigth="160" />
       <InputArea>
         <SignInput />
+
         <SignInput />
+
         <CustomButton>
           <CustomButtonText>Login</CustomButtonText>
         </CustomButton>
