@@ -1,10 +1,12 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Api from '../../Api';
 import Barber from '../../assets/barber.svg';
 import EmailIcon from '../../assets/email.svg';
 import LockIcon from '../../assets/lock.svg';
 import SignInput from '../../components/SignInput';
+import UserContext from '../../contexts/UserContext';
 import {
   Container,
   CustomButton,
@@ -16,6 +18,7 @@ import {
 } from './styles';
 
 export default () => {
+  const {dispatch: userDispatch} = useContext(UserContext);
   const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
 
@@ -25,7 +28,15 @@ export default () => {
     if (emailField !== '' && passwordField !== '') {
       let json = await Api.signIn(emailField, passwordField);
       if (json.token) {
-        alert('ok');
+        await AsyncStorage.setItem('token', json.token); //salvar token no asyncstore
+        userDispatch({
+          type: 'setAvatar',
+          payload: {
+            avatar: json.data.avatar,
+          },
+        });
+
+        navigation.reset({routes: [{name: 'MainTab'}]});
       } else {
         alert('Email e senha errados');
       }
