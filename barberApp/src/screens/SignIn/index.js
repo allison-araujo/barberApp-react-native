@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
+import Api from '../../Api';
 import Barber from '../../assets/barber.svg';
 import EmailIcon from '../../assets/email.svg';
 import LockIcon from '../../assets/lock.svg';
@@ -20,7 +21,18 @@ export default () => {
 
   const navigation = useNavigation();
 
-  const handleSignClick = () => {};
+  const handleSignClick = async () => {
+    if (emailField !== '' && passwordField !== '') {
+      let json = await Api.signIn(emailField, passwordField);
+      if (json.token) {
+        alert('ok');
+      } else {
+        alert('Email e senha errados');
+      }
+    } else {
+      alert('Preencha os campos!');
+    }
+  };
 
   const handleMessageButtonClick = () => {
     navigation.reset({
