@@ -17,6 +17,7 @@ export default () => {
       if (token !== null) {
         //valiudar token
         let res = await Api.checkToken(token);
+
         if (res.token) {
           await AsyncStorage.setItem('token', res.token); //salvar token no asyncstore
           userDispatch({
@@ -26,7 +27,7 @@ export default () => {
             },
           });
 
-          navigation.reset({routes: [{name: 'MainTab'}]});
+          navigation.reset({routes: [{name: 'SignIn'}]});
         } else {
         }
       } else {
@@ -34,7 +35,7 @@ export default () => {
       }
     };
     checkToken();
-  }, []);
+  });
 
   return (
     <Container>
