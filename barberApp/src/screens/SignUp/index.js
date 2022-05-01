@@ -1,11 +1,13 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Api from '../../Api';
 import Barber from '../../assets/barber.svg';
 import EmailIcon from '../../assets/email.svg';
 import LockIcon from '../../assets/lock.svg';
 import PersonIcon from '../../assets/person.svg';
 import SignInput from '../../components/SignInput';
+import UserContext from '../../contexts/UserContext';
 import {
   Container,
   CustomButton,
@@ -17,6 +19,7 @@ import {
 } from './styles';
 
 export default () => {
+  const {dispatch: userDispatch} = useContext(UserContext);
   const [emailField, setEmailField] = useState('');
   const [passwordField, setPasswordField] = useState('');
   const [nameField, setNameField] = useState('');
@@ -27,7 +30,15 @@ export default () => {
     if (nameField !== '' && emailField !== '' && passwordField !== '') {
       let res = await Api.signUp(nameField, emailField, passwordField);
       if (res.token) {
-        alert('ok');
+        await AsyncStorage.setItem('token', res.token); //salvar token no asyncstore
+        userDispatch({
+          type: 'setAvatar',
+          payload: {
+            avatar: res.data.avatar,
+          },
+        });
+
+        navigation.reset({routes: [{name: 'MainTab'}]});
       } else {
         alert('Erro: ' + res.error);
       }
