@@ -18,22 +18,26 @@ const TabItem = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export default () => {
+export default ({state, navigation}) => {
+  const goBack = screenName => {
+    navigation.navigate(screenName);
+  };
+
   return (
     <TabArea>
-      <TabItem>
+      <TabItem onPress={() => goBack('Home')}>
         <HomeIcon width="24" height="24" fill="#FFFF" />
       </TabItem>
-      <TabItem>
+      <TabItem onPress={() => goBack('Search')}>
         <SearchIcon width="24" height="24" fill="#FFFF" />
       </TabItem>
-      <TabItem>
+      <TabItem onPress={() => goBack('Appointments')}>
         <TodayIcon width="24" height="24" fill="#FFFF" />
       </TabItem>
-      <TabItem>
+      <TabItem onPress={() => goBack('Favorities')}>
         <FavoritiesIcon width="24" height="24" fill="#FFFF" />
       </TabItem>
-      <TabItem>
+      <TabItem onPress={() => goBack('Profile')}>
         <AccountIcon width="24" height="24" fill="#FFFF" />
       </TabItem>
     </TabArea>
