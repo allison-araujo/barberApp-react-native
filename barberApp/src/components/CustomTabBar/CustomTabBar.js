@@ -26,6 +26,7 @@ const TabItemCenter = styled.TouchableOpacity`
   background-color: #fff;
   border-radius: 35px;
   border: 3px solid #4eadbe;
+  margin-top: -20px;
 `;
 
 export default ({state, navigation}) => {
@@ -52,12 +53,7 @@ export default ({state, navigation}) => {
         />
       </TabItem>
       <TabItemCenter onPress={() => goBack('Appointments')}>
-        <TodayIcon
-          style={{opacity: state.index === 2 ? 1 : 0.5}}
-          width="24"
-          height="24"
-          fill="#FFFF"
-        />
+        <TodayIcon width="32" height="32" fill="#4EADBE" />
       </TabItemCenter>
       <TabItem onPress={() => goBack('Favorities')}>
         <FavoritiesIcon
