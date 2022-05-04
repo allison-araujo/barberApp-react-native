@@ -18,6 +18,16 @@ const TabItem = styled.TouchableOpacity`
   align-items: center;
 `;
 
+const TabItemCenter = styled.TouchableOpacity`
+  width: 70px;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 35px;
+  border: 3px solid #4eadbe;
+`;
+
 export default ({state, navigation}) => {
   const goBack = screenName => {
     navigation.navigate(screenName);
@@ -26,19 +36,44 @@ export default ({state, navigation}) => {
   return (
     <TabArea>
       <TabItem onPress={() => goBack('Home')}>
-        <HomeIcon width="24" height="24" fill="#FFFF" />
+        <HomeIcon
+          style={{opacity: state.index === 0 ? 1 : 0.5}}
+          width="24"
+          height="24"
+          fill="#FFFF"
+        />
       </TabItem>
       <TabItem onPress={() => goBack('Search')}>
-        <SearchIcon width="24" height="24" fill="#FFFF" />
+        <SearchIcon
+          style={{opacity: state.index === 1 ? 1 : 0.5}}
+          width="24"
+          height="24"
+          fill="#FFFF"
+        />
       </TabItem>
-      <TabItem onPress={() => goBack('Appointments')}>
-        <TodayIcon width="24" height="24" fill="#FFFF" />
-      </TabItem>
+      <TabItemCenter onPress={() => goBack('Appointments')}>
+        <TodayIcon
+          style={{opacity: state.index === 2 ? 1 : 0.5}}
+          width="24"
+          height="24"
+          fill="#FFFF"
+        />
+      </TabItemCenter>
       <TabItem onPress={() => goBack('Favorities')}>
-        <FavoritiesIcon width="24" height="24" fill="#FFFF" />
+        <FavoritiesIcon
+          style={{opacity: state.index === 3 ? 1 : 0.5}}
+          width="24"
+          height="24"
+          fill="#FFFF"
+        />
       </TabItem>
       <TabItem onPress={() => goBack('Profile')}>
-        <AccountIcon width="24" height="24" fill="#FFFF" />
+        <AccountIcon
+          style={{opacity: state.index === 4 ? 1 : 0.5}}
+          width="24"
+          height="24"
+          fill="#FFFF"
+        />
       </TabItem>
     </TabArea>
   );
