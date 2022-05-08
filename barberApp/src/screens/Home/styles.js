@@ -49,3 +49,7 @@ export const SearchButton = styled.TouchableOpacity`
   width: 26px;
   height: 26px;
 `;
+
+export const LoadingIcon = styled.ActivityIndicator`
+  margin-top: 50px;
+`;

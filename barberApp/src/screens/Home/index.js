@@ -9,6 +9,7 @@ import {
   Container,
   HeaderArea,
   HeaderTitle,
+  LoadingIcon,
   LocationArea,
   LocationFinder,
   LocationInput,
@@ -20,6 +21,8 @@ export default () => {
   const navigation = useNavigation();
   const [locationText, setLocationText] = useState();
   const [coords, setCoords] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState([]);
 
   const handleLocationFinder = async () => {
     setCoords(null);
@@ -29,9 +32,18 @@ export default () => {
         : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
     );
     if (result === 'granted') {
-      Geolocation.getCurrentPosition(info => {});
+      setLoading(true);
+      setLocationText('');
+      setList([]);
+
+      Geolocation.getCurrentPosition(info => {
+        setCoords(info.coords);
+        getBarbers();
+      });
     }
   };
+
+  const getBarbers = () => {};
 
   return (
     <Container>
@@ -53,6 +65,8 @@ export default () => {
             <MyLocationIcon width="24" height="24" fill="#FFF" />
           </LocationFinder>
         </LocationArea>
+
+        <LoadingIcon size="large" color="#FFF" />
       </Scroller>
     </Container>
   );
