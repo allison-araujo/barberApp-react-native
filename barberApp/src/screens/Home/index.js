@@ -6,10 +6,12 @@ import {PERMISSIONS, request} from 'react-native-permissions';
 import Api from '../../Api';
 import MyLocationIcon from '../../assets/my_location.svg';
 import SearchIcon from '../../assets/search.svg';
+import BarberItem from '../../components/BarberItem/BarberItem';
 import {
   Container,
   HeaderArea,
   HeaderTitle,
+  ListArea,
   LoadingIcon,
   LocationArea,
   LocationFinder,
@@ -50,6 +52,9 @@ export default () => {
     let res = Api.getListBarbers();
 
     if (res.error === '') {
+      if (res.loc) {
+        setLocationText(res.loc);
+      }
       setList(res.data);
     } else {
       alert('Error:' + res.error);
@@ -83,6 +88,11 @@ export default () => {
         </LocationArea>
 
         {loading && <LoadingIcon size="large" color="#FFF" />}
+        <ListArea>
+          {list.map((item, key) => {
+            <BarberItem key={key} data={item} />;
+          })}
+        </ListArea>
       </Scroller>
     </Container>
   );
