@@ -1,13 +1,25 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const Area = styled.TouchableOpacity``;
+const Area = styled.TouchableOpacity`
+  background-color: #ffff;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 15px;
+  flex-direction: row;
+`;
 
-const Avatar = styled.Image``;
+const Avatar = styled.Image`
+  margin-left: 20px;
+  justify-content: space-between;
+`;
 
 const InfoArea = styled.View``;
 
-const UserName = styled.Text``;
+const UserName = styled.Text`
+  font-size: 17px;
+  font-weight: bold;
+`;
 
 const SeeProfileButton = styled.View``;
 
