@@ -1,8 +1,9 @@
 import Geolocation from '@react-native-community/geolocation';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Plataform} from 'react-native';
 import {PERMISSIONS, request} from 'react-native-permissions';
+import Api from '../../Api';
 import MyLocationIcon from '../../assets/my_location.svg';
 import SearchIcon from '../../assets/search.svg';
 import {
@@ -38,12 +39,27 @@ export default () => {
 
       Geolocation.getCurrentPosition(info => {
         setCoords(info.coords);
-        getBarbers();
+        getListBarbers();
       });
     }
   };
 
-  const getBarbers = () => {};
+  const getListBarbers = async () => {
+    setLoading(true);
+    setList([]);
+    let res = Api.getListBarbers();
+
+    if (res.error === '') {
+      setList(res.data);
+    } else {
+      alert('Error:' + res.error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getListBarbers();
+  }, []);
 
   return (
     <Container>
@@ -66,7 +82,7 @@ export default () => {
           </LocationFinder>
         </LocationArea>
 
-        <LoadingIcon size="large" color="#FFF" />
+        {loading && <LoadingIcon size="large" color="#FFF" />}
       </Scroller>
     </Container>
   );
