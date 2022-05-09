@@ -14,16 +14,29 @@ const Avatar = styled.Image`
   justify-content: space-between;
 `;
 
-const InfoArea = styled.View``;
+const InfoArea = styled.View`
+  margin-left: 20px;
+  justify-content: space-between;
+`;
 
 const UserName = styled.Text`
   font-size: 17px;
   font-weight: bold;
 `;
 
-const SeeProfileButton = styled.View``;
+const SeeProfileButton = styled.View`
+  width: 85px;
+  height: 26px;
+  border: 1px solid #4eadbe;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+`;
 
-const SeeProfileButtonText = styled.Text``;
+const SeeProfileButtonText = styled.Text`
+  font-size: 10px;
+  color: #268596;
+`;
 
 export default ({data}) => {
   return (
