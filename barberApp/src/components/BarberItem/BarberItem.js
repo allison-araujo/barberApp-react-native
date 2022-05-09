@@ -45,6 +45,8 @@ export default ({data}) => {
       <InfoArea>
         <UserName>{data.name}</UserName>
 
+        <Stars stars={data.stars} showAvaliation={true} />
+
         <SeeProfileButton>
           <SeeProfileButtonText>Ver perfil</SeeProfileButtonText>
         </SeeProfileButton>
