@@ -8,6 +8,13 @@ const StarArea = styled.View`
   flex-direction: row;
 `;
 
+const StarView = styled.View`
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 5px;
+  color: #73737373;
+`;
+
 export default ({stars, showAssess}) => {
   let valueSTars = [0, 0, 0, 0, 0];
 
@@ -20,6 +27,7 @@ export default ({stars, showAssess}) => {
           {p === 2 && <StarFull width="18" height="18" fill="#FF9200" />}
         </StarView>
       ))}
+      {showAssess && <StarText>{stars}</StarText>}
     </StarArea>
   );
 };
