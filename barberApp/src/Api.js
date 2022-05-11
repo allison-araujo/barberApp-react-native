@@ -44,9 +44,11 @@ export default {
     return json;
   },
 
-  getListBarbers: async () => {
+  getListBarbers: async (lat = null, lg = null, address = null) => {
     const token = await AsyncStorage.getItem('token');
-    const req = await fetch(`{BASE_API}/barbers?token=${token}`);
+    const req = await fetch(
+      `{BASE_API}/barbers?token=${token}&lat=${lat}&lg=${lg}&address=${address}`,
+    );
     const json = await req.json();
     return json;
   },

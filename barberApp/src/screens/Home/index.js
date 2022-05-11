@@ -50,7 +50,15 @@ export default () => {
   const getListBarbers = async () => {
     setLoading(true);
     setList([]);
-    let res = Api.getListBarbers();
+    let lat = null;
+    let lg = null;
+
+    if (coords !== null) {
+      lat = coords.latitude;
+      lg = coords.longitude;
+    }
+
+    let res = Api.getListBarbers(lat, lg, locationText);
 
     if (res.error === '') {
       if (res.loc) {
@@ -65,10 +73,15 @@ export default () => {
 
   useEffect(() => {
     getListBarbers();
-  }, []);
+  });
 
   const onRefresh = () => {
     setRefreshing(false);
+    getListBarbers();
+  };
+
+  const handleLocationSearch = () => {
+    setCoords({});
     getListBarbers();
   };
 
@@ -90,6 +103,7 @@ export default () => {
             placeholderTextColor="#FFF"
             value={locationText}
             onChangeText={t => setLocationText(t)}
+            onEndEditing={handleLocationSearch}
           />
           <LocationFinder onPress={handleLocationFinder}>
             <MyLocationIcon width="24" height="24" fill="#FFF" />
