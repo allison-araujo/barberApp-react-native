@@ -1,7 +1,7 @@
 import Geolocation from '@react-native-community/geolocation';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Plataform} from 'react-native';
+import {Plataform, RefreshControl} from 'react-native';
 import {PERMISSIONS, request} from 'react-native-permissions';
 import Api from '../../Api';
 import MyLocationIcon from '../../assets/my_location.svg';
@@ -26,6 +26,7 @@ export default () => {
   const [coords, setCoords] = useState(null);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleLocationFinder = async () => {
     setCoords(null);
@@ -66,9 +67,17 @@ export default () => {
     getListBarbers();
   }, []);
 
+  const onRefresh = () => {
+    setRefreshing(false);
+    getListBarbers();
+  };
+
   return (
     <Container>
-      <Scroller>
+      <Scroller
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <HeaderArea>
           <HeaderTitle numberOfLines={2}>Encontre sua barbearis</HeaderTitle>
           <SearchButton onPress={() => navigation.navigate('Search')}>
