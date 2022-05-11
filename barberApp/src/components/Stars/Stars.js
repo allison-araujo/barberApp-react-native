@@ -8,7 +8,9 @@ const StarArea = styled.View`
   flex-direction: row;
 `;
 
-const StarView = styled.View`
+const StarView = styled.View``;
+
+const StarText = styled.View`
   font-size: 12px;
   font-weight: bold;
   margin-left: 5px;
@@ -17,6 +19,17 @@ const StarView = styled.View`
 
 export default ({stars, showAssess}) => {
   let valueSTars = [0, 0, 0, 0, 0];
+
+  let floor = Math.floor(stars);
+  let left = stars - floor;
+
+  for (var i = 0; i < floor; i++) {
+    valueSTars[i] = 2;
+
+    if (left > 0) {
+      valueSTars[i] = 1;
+    }
+  }
 
   return (
     <StarArea>
