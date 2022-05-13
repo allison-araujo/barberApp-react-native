@@ -44,6 +44,22 @@ export default {
     return json;
   },
 
+  logout: async () => {
+    const token = await AsyncStorage.getItem('token');
+
+    const req = await fetch(`${BASE_API}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    });
+
+    const json = await req.json({token});
+    return json;
+  },
+
   getListBarbers: async (lat = null, lg = null, address = null) => {
     const token = await AsyncStorage.getItem('token');
     const req = await fetch(
