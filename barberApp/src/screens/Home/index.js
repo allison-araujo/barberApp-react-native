@@ -58,7 +58,7 @@ export default () => {
       lg = coords.longitude;
     }
 
-    let res = Api.getListBarbers(lat, lg, locationText);
+    let res = Api.getListBarbersAll(lat, lg, locationText);
 
     if (res.error === '') {
       if (res.loc) {
