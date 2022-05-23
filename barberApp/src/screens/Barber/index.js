@@ -1,8 +1,16 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
+import Swiper from 'react-native-swiper';
 import Api from '../../Api';
-import {Container} from './styles';
+import {
+  Container,
+  FakeSwiper,
+  PageBody,
+  Scroller,
+  ServiceArea,
+  TestimialArea,
+  UserInforArea,
+} from './styles';
 
 export default () => {
   const navigation = useNavigation();
@@ -32,7 +40,18 @@ export default () => {
 
   return (
     <Container>
-      <Text>Barber: {userInfo.name} </Text>
+      <Scroller>
+        {userInfo.photos && userInfo.photos.length > 0 ? (
+          <Swiper></Swiper>
+        ) : (
+          <FakeSwiper></FakeSwiper>
+        )}
+        <PageBody>
+          <UserInforArea></UserInforArea>
+          <ServiceArea></ServiceArea>
+          <TestimialArea></TestimialArea>
+        </PageBody>
+      </Scroller>
     </Container>
   );
 };
