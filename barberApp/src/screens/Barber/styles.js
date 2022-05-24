@@ -48,3 +48,9 @@ export const SwiperImage = styled.Image`
   width: 100%;
   height: 240px;
 `;
+
+export const UserAvatar = styled.Image``;
+
+export const UserInfoName = styled.Text``;
+
+export const UserFavButtom = styled.TouchableOpacity``;

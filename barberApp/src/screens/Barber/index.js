@@ -15,7 +15,11 @@ import {
   SwiperImage,
   SwiperItem,
   TestimialArea,
+  UserAvatar,
+  UserFavButtom,
+  UserInfo,
   UserInforArea,
+  UserInforName,
 } from './styles';
 export default () => {
   const navigation = useNavigation();
