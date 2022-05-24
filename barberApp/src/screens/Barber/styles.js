@@ -7,7 +7,11 @@ export const Container = styled.SafeAreaView`
 
 export const FakeSwiper = styled.View``;
 
-export const PageBody = styled.View``;
+export const PageBody = styled.View`
+  background-color: #fff;
+  border-top-left-radius: 50px;
+  margin-top: -50px;
+`;
 
 export const Scroller = styled.ScrollView`
   flex: 1;
@@ -24,7 +28,7 @@ export const SwiperDot = styled.View`
   height: 10px;
   background-color: #fff;
   border-radius: 5px;
-  margin: 3 px;
+  margin: 3px;
 `;
 
 export const SwiperDotActive = styled.View`

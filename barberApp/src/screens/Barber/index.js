@@ -2,6 +2,8 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import Swiper from 'react-native-swiper';
 import Api from '../../Api';
+import FavoriteIcon from '../../assets/favorite.svg';
+import Starts from '../../components/Stars';
 import {
   Container,
   FakeSwiper,
@@ -15,7 +17,6 @@ import {
   TestimialArea,
   UserInforArea,
 } from './styles';
-
 export default () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -67,7 +68,16 @@ export default () => {
           <FakeSwiper></FakeSwiper>
         )}
         <PageBody>
-          <UserInforArea></UserInforArea>
+          <UserInforArea>
+            <UserAvatar source={{uri: userInfo.avatar}} />
+            <UserInfo>
+              <UserInforName>{userInfo.name}</UserInforName>
+              <Starts stars={userInfo.starts} showAssess={true} />
+            </UserInfo>
+            <UserFavButtom>
+              <FavoriteIcon width="24" height="24" fill="#FFF000" />
+            </UserFavButtom>
+          </UserInforArea>
           <ServiceArea></ServiceArea>
           <TestimialArea></TestimialArea>
         </PageBody>
