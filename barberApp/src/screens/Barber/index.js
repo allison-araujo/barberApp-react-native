@@ -10,6 +10,8 @@ import {
   ServiceArea,
   SwipeDotActive,
   SwiperDot,
+  SwiperImage,
+  SwiperItem,
   TestimialArea,
   UserInforArea,
 } from './styles';
@@ -53,7 +55,14 @@ export default () => {
               right: 15,
               bottom: null,
               left: null,
-            }}></Swiper>
+            }}
+            autoplay={true}>
+            {userInfo.photos.map((item, key) => (
+              <SwiperItem key={key}>
+                <SwiperImage source={{uri: item.url}} resizeMode="cover" />
+              </SwiperItem>
+            ))}
+          </Swiper>
         ) : (
           <FakeSwiper></FakeSwiper>
         )}
