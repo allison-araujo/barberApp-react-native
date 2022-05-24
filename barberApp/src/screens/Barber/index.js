@@ -8,6 +8,8 @@ import {
   PageBody,
   Scroller,
   ServiceArea,
+  SwipeDotActive,
+  SwiperDot,
   TestimialArea,
   UserInforArea,
 } from './styles';
@@ -42,7 +44,16 @@ export default () => {
     <Container>
       <Scroller>
         {userInfo.photos && userInfo.photos.length > 0 ? (
-          <Swiper></Swiper>
+          <Swiper
+            style={{height: 240}}
+            dot={<SwiperDot />}
+            activeDot={<SwipeDotActive />}
+            paginationStyle={{
+              top: 15,
+              right: 15,
+              bottom: null,
+              left: null,
+            }}></Swiper>
         ) : (
           <FakeSwiper></FakeSwiper>
         )}

@@ -2,17 +2,18 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView``;
 
+export const FakeSwiper = styled.View``;
 
+export const PageBody = styled.View``;
 
+export const Scroller = styled.ScrollView``;
 
-export const FakeSwiper = styled.``;
+export const ServiceArea = styled.View``;
 
-export const PageBody = styled.``;
+export const TestimialArea = styled.View``;
 
-export const Scroller = styled.``;
+export const UserInforArea = styled.View``;
 
-export const ServiceArea = styled.``;
+export const SwiperDot = styled.View``;
 
-export const TestimialArea = styled.``;
-
-export const UserInforArea = styled.``;
+export const SwiperDotActive = styled.View``;
