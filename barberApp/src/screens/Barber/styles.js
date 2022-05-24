@@ -21,7 +21,9 @@ export const ServiceArea = styled.View``;
 
 export const TestimialArea = styled.View``;
 
-export const UserInforArea = styled.View``;
+export const UserInforArea = styled.View`
+  flex-direction: row;
+`;
 
 export const SwiperDot = styled.View`
   width: 10px;
@@ -49,8 +51,29 @@ export const SwiperImage = styled.Image`
   height: 240px;
 `;
 
-export const UserAvatar = styled.Image``;
+export const UserAvatar = styled.Image`
+  width: 110px;
+  height: 110px;
+  border-radius: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-width: 4px;
+  border-color: #ffff;
+`;
 
-export const UserInfoName = styled.Text``;
+export const UserInfoName = styled.Text`
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
 
-export const UserFavButtom = styled.TouchableOpacity``;
+export const UserFavButtom = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  background-color: #ffff;
+  border: 2px solid #9999;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+`;
