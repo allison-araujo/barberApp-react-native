@@ -17,12 +17,9 @@ export const Scroller = styled.ScrollView`
   flex: 1;
 `;
 
-export const ServiceArea = styled.View``;
-
-export const TestimialArea = styled.View``;
-
 export const UserInforArea = styled.View`
   flex-direction: row;
+  margin-top: -30px;
 `;
 
 export const SwiperDot = styled.View`
@@ -76,4 +73,18 @@ export const UserFavButtom = styled.TouchableOpacity`
   border-radius: 20px;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+`;
+
+export const TestimonialArea = styled.View``;
+
+export const ServiceArea = styled.View``;
+
+export const BackButton = styled.TouchableOpacity`
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
 `;
