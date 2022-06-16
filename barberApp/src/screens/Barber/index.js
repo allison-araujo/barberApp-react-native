@@ -2,9 +2,11 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import Swiper from 'react-native-swiper';
 import Api from '../../Api';
+import BackIcon from '../../assets/back.svg';
 import FavoriteIcon from '../../assets/favorite.svg';
 import Starts from '../../components/Stars';
 import {
+  BackButton,
   Container,
   FakeSwiper,
   PageBody,
@@ -21,6 +23,7 @@ import {
   UserInforArea,
   UserInforName,
 } from './styles';
+
 export default () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -46,6 +49,10 @@ export default () => {
     };
     getBarberInfo();
   }, [userInfo.id]);
+
+  const handleBackButton = () => {
+    navigation.goBack();
+  };
 
   return (
     <Container>
@@ -86,6 +93,9 @@ export default () => {
           <TestimialArea></TestimialArea>
         </PageBody>
       </Scroller>
+      <BackButton onPress={handleBackButton}>
+        <BackIcon width="44" height="44" fil="#FFFF" />
+      </BackButton>
     </Container>
   );
 };
