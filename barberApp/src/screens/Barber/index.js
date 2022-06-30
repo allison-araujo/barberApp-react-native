@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Swiper from 'react-native-swiper';
 import Api from '../../Api';
 import BackIcon from '../../assets/back.svg';
@@ -9,6 +9,7 @@ import {
   BackButton,
   Container,
   FakeSwiper,
+  LoadingIcon,
   PageBody,
   Scroller,
   ServiceArea,
@@ -89,6 +90,7 @@ export default () => {
               <FavoriteIcon width="24" height="24" fill="#FFF000" />
             </UserFavButtom>
           </UserInforArea>
+          {loading && <LoadingIcon size="large" color="#0000000" />}
           <ServiceArea></ServiceArea>
           <TestimialArea></TestimialArea>
         </PageBody>

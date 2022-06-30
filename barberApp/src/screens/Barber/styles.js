@@ -5,7 +5,10 @@ export const Container = styled.SafeAreaView`
   background-color: #ffff;
 `;
 
-export const FakeSwiper = styled.View``;
+export const FakeSwiper = styled.View`
+  height: 140px;
+  background-color: #63c2d1;
+`;
 
 export const PageBody = styled.View`
   background-color: #fff;
@@ -87,4 +90,8 @@ export const BackButton = styled.TouchableOpacity`
   left: 0;
   top: 0;
   z-index: 9;
+`;
+
+export const LoadingIcon = styled.ActivityIndicator`
+  margin-top: 50px;
 `;
