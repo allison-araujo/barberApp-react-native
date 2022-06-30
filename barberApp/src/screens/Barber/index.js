@@ -13,6 +13,13 @@ import {
   PageBody,
   Scroller,
   ServiceArea,
+  ServiceChooseBtnText,
+  ServiceChooseButton,
+  ServiceInfo,
+  ServiceItem,
+  ServiceName,
+  ServicePrice,
+  ServicesTitle,
   SwipeDotActive,
   SwiperDot,
   SwiperImage,
@@ -91,7 +98,20 @@ export default () => {
             </UserFavButtom>
           </UserInforArea>
           {loading && <LoadingIcon size="large" color="#0000000" />}
-          <ServiceArea></ServiceArea>
+          <ServiceArea>
+            <ServicesTitle>Lista de Serviços</ServicesTitle>
+            {UserInfo.services.map((item, key) => (
+              <ServiceItem key={key}>
+                <ServiceInfo>
+                  <ServiceName>{item.name}</ServiceName>]
+                  <ServicePrice>R$ {item.price}</ServicePrice>
+                </ServiceInfo>
+                <ServiceChooseButton>
+                  <ServiceChooseBtnText>Agendar</ServiceChooseBtnText>
+                </ServiceChooseButton>
+              </ServiceItem>
+            ))}
+          </ServiceArea>
           <TestimialArea></TestimialArea>
         </PageBody>
       </Scroller>
