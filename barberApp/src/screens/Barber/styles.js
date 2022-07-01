@@ -84,7 +84,7 @@ export const UserFavButtom = styled.TouchableOpacity`
 export const TestimonialArea = styled.View``;
 
 export const ServiceArea = styled.View`
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 export const ServiceItem = styled.View`

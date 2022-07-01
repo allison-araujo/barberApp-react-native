@@ -4,6 +4,8 @@ import Swiper from 'react-native-swiper';
 import Api from '../../Api';
 import BackIcon from '../../assets/back.svg';
 import FavoriteIcon from '../../assets/favorite.svg';
+import NavNextIcon from '../../assets/nav_next.svg';
+import NavPrevIcon from '../../assets/nav_prev.svg';
 import Starts from '../../components/Stars';
 import {
   BackButton,
@@ -25,6 +27,10 @@ import {
   SwiperImage,
   SwiperItem,
   TestimialArea,
+  TestimoialName,
+  TestimonialBody,
+  TestimonialInfo,
+  TestimonialItem,
   UserAvatar,
   UserFavButtom,
   UserInfo,
@@ -98,21 +104,46 @@ export default () => {
             </UserFavButtom>
           </UserInforArea>
           {loading && <LoadingIcon size="large" color="#0000000" />}
-          <ServiceArea>
-            <ServicesTitle>Lista de Serviços</ServicesTitle>
-            {UserInfo.services.map((item, key) => (
-              <ServiceItem key={key}>
-                <ServiceInfo>
-                  <ServiceName>{item.name}</ServiceName>]
-                  <ServicePrice>R$ {item.price}</ServicePrice>
-                </ServiceInfo>
-                <ServiceChooseButton>
-                  <ServiceChooseBtnText>Agendar</ServiceChooseBtnText>
-                </ServiceChooseButton>
-              </ServiceItem>
-            ))}
-          </ServiceArea>
-          <TestimialArea></TestimialArea>
+          {userInfo.services && (
+            <ServiceArea>
+              <ServicesTitle>Lista de Serviços</ServicesTitle>
+              {userInfo.services.map((item, key) => (
+                <ServiceItem key={key}>
+                  <ServiceInfo>
+                    <ServiceName>{item.name}</ServiceName>]
+                    <ServicePrice>R$ {item.price}</ServicePrice>
+                  </ServiceInfo>
+                  <ServiceChooseButton>
+                    <ServiceChooseBtnText>Agendar</ServiceChooseBtnText>
+                  </ServiceChooseButton>
+                </ServiceItem>
+              ))}
+            </ServiceArea>
+          )}
+          {userInfo.testimonials && userInfo.testimonials.length > 0 && (
+            <TestimialArea>
+              <Swiper
+                style={{height: 110}}
+                showsPagination={false}
+                showsButtons={true}
+                prevButton={
+                  <NavPrevIcon width="35" height="35" fill="#000000" />
+                }
+                nextButton={
+                  <NavNextIcon width="35" height="35" fill="#000000" />
+                }>
+                {userInfo.testimonials.map((item, key) => (
+                  <TestimonialItem key={key}>
+                    <TestimonialInfo>
+                      <TestimoialName>{item.name}</TestimoialName>
+                      <Starts stars={item.rate} showNumber={false} />
+                      <TestimonialBody>{item.body}</TestimonialBody>
+                    </TestimonialInfo>
+                  </TestimonialItem>
+                ))}
+              </Swiper>
+            </TestimialArea>
+          )}
         </PageBody>
       </Scroller>
       <BackButton onPress={handleBackButton}>
