@@ -81,8 +81,6 @@ export const UserFavButtom = styled.TouchableOpacity`
   margin-right: 20px;
 `;
 
-export const TestimonialArea = styled.View``;
-
 export const ServiceArea = styled.View`
   margin-top: 10px;
 `;
@@ -138,4 +136,36 @@ export const BackButton = styled.TouchableOpacity`
 
 export const LoadingIcon = styled.ActivityIndicator`
   margin-top: 50px;
+`;
+
+export const TestimonialArea = styled.View`
+  margin-top: 30px;
+  margin-bottom: 50px;
+`;
+
+export const TestimonialItem = styled.View`
+  background-color: #268596;
+  padding: 15px;
+  border-radius: 10px;
+  height: 110px;
+  justify-content: center;
+  margin-left: 40px;
+  margin-right: 40px;
+`;
+
+export const TestimonialInfo = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+`;
+
+export const TestimonialName = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffff;
+`;
+
+export const TestimonialBody = styled.Text`
+  color: #ffff;
+  font-size: 13px;
 `;
