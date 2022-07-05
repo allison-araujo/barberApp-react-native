@@ -4,6 +4,7 @@ import Swiper from 'react-native-swiper';
 import Api from '../../Api';
 import BackIcon from '../../assets/back.svg';
 import FavoriteIcon from '../../assets/favorite.svg';
+import FavoriteFullIcon from '../../assets/favorite_full.svg';
 import NavNextIcon from '../../assets/nav_next.svg';
 import NavPrevIcon from '../../assets/nav_prev.svg';
 import Starts from '../../components/Stars';
@@ -27,10 +28,10 @@ import {
   SwiperImage,
   SwiperItem,
   TestimialArea,
-  TestimoialName,
   TestimonialBody,
   TestimonialInfo,
   TestimonialItem,
+  TestimonialName,
   UserAvatar,
   UserFavButtom,
   UserInfo,
@@ -42,7 +43,7 @@ export default () => {
   const navigation = useNavigation();
   const route = useRoute();
   const [loading, setLoading] = useState(false);
-
+  const [favorited, setFavorited] = useState(false);
   const [userInfo, setUserInfor] = useState({
     id: route.params.id,
     avatar: route.params.avatar,
@@ -56,6 +57,7 @@ export default () => {
       let json = await Api.getBarberListId(userInfo.id);
       if (json.error === '') {
         setUserInfor(json.data);
+        setFavorited(json.data.favorited);
       } else {
         alert('error' + json.error);
       }
@@ -66,6 +68,11 @@ export default () => {
 
   const handleBackButton = () => {
     navigation.goBack();
+  };
+
+  const handlFavClick = () => {
+    setFavorited(!favorited);
+    Api.setFavorite(userInfo.id);
   };
 
   return (
@@ -99,8 +106,12 @@ export default () => {
               <UserInforName>{userInfo.name}</UserInforName>
               <Starts stars={userInfo.starts} showAssess={true} />
             </UserInfo>
-            <UserFavButtom>
-              <FavoriteIcon width="24" height="24" fill="#FFF000" />
+            <UserFavButtom onPress={handlFavClick}>
+              {favorited ? (
+                <FavoriteFullIcon width="24" height="24" fill="#FFF000" />
+              ) : (
+                <FavoriteIcon width="24" height="24" fill="#FFF000" />
+              )}
             </UserFavButtom>
           </UserInforArea>
           {loading && <LoadingIcon size="large" color="#0000000" />}
@@ -135,7 +146,7 @@ export default () => {
                 {userInfo.testimonials.map((item, key) => (
                   <TestimonialItem key={key}>
                     <TestimonialInfo>
-                      <TestimoialName>{item.name}</TestimoialName>
+                      <TestimonialName>{item.name}</TestimonialName>
                       <Starts stars={item.rate} showNumber={false} />
                       <TestimonialBody>{item.body}</TestimonialBody>
                     </TestimonialInfo>
