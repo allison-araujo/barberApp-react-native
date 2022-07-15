@@ -1,4 +1,6 @@
+import {useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
+import ExpandIcon from '../../assets/expand.svg';
 
 const Modal = styled.Modal``;
 
@@ -21,7 +23,32 @@ const CloseButton = styled.TouchableOpacity`
   height: 40px;
 `;
 
+const ModalItem = styled.View`
+  background-color: #ffff;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 10px;
+`;
+
+const UserInfo = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const UserAvatar = styled.Image`
+  width: 55px;
+  height: 55px;
+  border-radius: 20px;
+  margin-right: 15px;
+`;
+
+const UserName = styled.Text`
+  color: #000000;
+  font-size: 18px;
+`;
+
 export default ({show, setShow, user, service}) => {
+  const navigation = useNavigation();
   const handleCloseButton = () => {
     setShow(false);
   };
@@ -29,7 +56,15 @@ export default ({show, setShow, user, service}) => {
     <Modal transparent={true} visible={show} animationType="slide">
       <ModalArea>
         <ModalBody>
-          <CloseButton onPress={handleCloseButton}></CloseButton>
+          <CloseButton onPress={handleCloseButton}>
+            <ExpandIcon width="40" height="40" fill="#000" />
+          </CloseButton>
+          <ModalItem>
+            <UserInfo>
+              <UserAvatar source={{uri: user.avatar}} />
+              <UserName>{user.name}</UserName>
+            </UserInfo>
+          </ModalItem>
         </ModalBody>
       </ModalArea>
     </Modal>
