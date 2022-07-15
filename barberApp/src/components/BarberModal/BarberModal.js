@@ -45,6 +45,22 @@ const UserAvatar = styled.Image`
 const UserName = styled.Text`
   color: #000000;
   font-size: 18px;
+  font-weight: bold;
+`;
+
+const ServiceInfo = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ServiceName = styled.Text`
+  font-weight: bold;
+  font-size: 16px;
+`;
+
+const ServicePrice = styled.Text`
+  font-weight: bold;
+  font-size: 16px;
 `;
 
 export default ({show, setShow, user, service}) => {
@@ -64,6 +80,12 @@ export default ({show, setShow, user, service}) => {
               <UserAvatar source={{uri: user.avatar}} />
               <UserName>{user.name}</UserName>
             </UserInfo>
+          </ModalItem>
+          <ModalItem>
+            <ServiceInfo>
+              <ServiceName>{user.services[service].name}</ServiceName>
+              <ServicePrice>R$ {user.services[service].price}</ServicePrice>
+            </ServiceInfo>
           </ModalItem>
         </ModalBody>
       </ModalArea>
