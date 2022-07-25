@@ -73,6 +73,23 @@ const FinishButton = styled.TouchableOpacity`
 
 const FinishButtonText = styled.Text``;
 
+const months = [
+  'JANEIRO',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembrp',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
+];
+
+const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
+
 export default ({show, setShow, user, service}) => {
   const navigation = useNavigation();
   const handleCloseButton = () => {
@@ -103,6 +120,15 @@ export default ({show, setShow, user, service}) => {
               </ServiceInfo>
             </ModalItem>
           )}
+          <ModalItem>
+            <DateInfo>
+              <DatePrevArea></DatePrevArea>
+              <DateTitleArea>
+                <DateTitle></DateTitle>
+              </DateTitleArea>
+              <DateNextArea></DateNextArea>
+            </DateInfo>
+          </ModalItem>
           <FinishButton onPress={handleFinishClick}>
             <FinishButtonText>Finalizar Agendamento</FinishButtonText>
           </FinishButton>
