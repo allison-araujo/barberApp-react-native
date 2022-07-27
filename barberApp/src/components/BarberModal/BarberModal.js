@@ -1,6 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import ExpandIcon from '../../assets/expand.svg';
+import NavNextIcon from '../../assets/nav_next.svg';
+import NavPrevIcon from '../../assets/nav_prev.svg';
 
 const Modal = styled.Modal``;
 
@@ -73,6 +75,34 @@ const FinishButton = styled.TouchableOpacity`
 
 const FinishButtonText = styled.Text``;
 
+const DateInfo = styled.View`
+  flex-direction: row;
+`;
+
+const DatePrevArea = styled.TouchableOpacity`
+  flex: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+`;
+
+const DateNextArea = styled.TouchableOpacity`
+  flex: 1;
+  align-items: flex-start;
+`;
+
+const DateTitleArea = styled.View`
+  width: 140px;
+  justify-content: center;
+
+  align-items: center;
+`;
+
+const DateTitle = styled.Text`
+  font-size: 17px;
+  font-weight: bold;
+  color: #000000;
+`;
+
 const months = [
   'JANEIRO',
   'Fevereiro',
@@ -122,11 +152,15 @@ export default ({show, setShow, user, service}) => {
           )}
           <ModalItem>
             <DateInfo>
-              <DatePrevArea></DatePrevArea>
+              <DatePrevArea>
+                <NavPrevIcon width="35" height="35" fill="#000" />
+              </DatePrevArea>
               <DateTitleArea>
-                <DateTitle></DateTitle>
+                <DateTitle>Julho 2022</DateTitle>
               </DateTitleArea>
-              <DateNextArea></DateNextArea>
+              <DateNextArea>
+                <NavNextIcon width="35" height="35" fill="#000" />
+              </DateNextArea>
             </DateInfo>
           </ModalItem>
           <FinishButton onPress={handleFinishClick}>
