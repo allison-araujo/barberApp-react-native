@@ -103,6 +103,8 @@ const DateTitle = styled.Text`
   color: #000000;
 `;
 
+const DateList = styled.ScrollView``;
+
 const months = [
   'JANEIRO',
   'Fevereiro',
@@ -127,6 +129,31 @@ export default ({show, setShow, user, service}) => {
   const [selectedHour, setSelectedHour] = useState(null);
   const [listDay, setListDays] = useState([]);
   const [listHours, setListHours] = useState([]);
+
+  useEffect(() => {
+    let daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
+    let newListDays = [];
+
+    for (let i = 1; i < daysInMonth; i++) {
+      let day = new Date(selectedYear, selectedMonth, i);
+      let year = day.getFullYear();
+      let month = day.getMonth();
+      let dy = day.getDate();
+
+      month = month < 10 ? '0' + month : month;
+      dy = dy < 10 ? '0' + dy : dy;
+
+      let selDate = year + '-' + month + '-' + dy;
+      let avaliabilitty = user.available.filter(e => e.date === selDate);
+
+      newListDays.push({
+        status: avaliabilitty.length > 0 ? true : false,
+        weekday: days[day.getDay()],
+        number: i,
+      });
+    }
+    setListDays(newListDays);
+  }, [selectedMonth, selectedYear]);
 
   useEffect(() => {
     let today = new Date();
@@ -197,6 +224,9 @@ export default ({show, setShow, user, service}) => {
                 <NavNextIcon width="35" height="35" fill="#000" />
               </DateNextArea>
             </DateInfo>
+            <DateList
+              horizontal={true}
+              showHorizontalScrollIndicator={false}></DateList>
           </ModalItem>
           <FinishButton onPress={handleFinishClick}>
             <FinishButtonText>Finalizar Agendamento</FinishButtonText>
