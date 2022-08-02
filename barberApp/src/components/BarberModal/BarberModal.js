@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import ExpandIcon from '../../assets/expand.svg';
 import NavNextIcon from '../../assets/nav_next.svg';
@@ -93,7 +94,6 @@ const DateNextArea = styled.TouchableOpacity`
 const DateTitleArea = styled.View`
   width: 140px;
   justify-content: center;
-
   align-items: center;
 `;
 
@@ -121,12 +121,44 @@ const months = [
 const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 
 export default ({show, setShow, user, service}) => {
+  const [selectedYear, setSelectedYear] = useState(0);
+  const [selectedMonth, setSelectedMonths] = useState(0);
+  const [selectedDay, setSelectedDay] = useState(0);
+  const [selectedHour, setSelectedHour] = useState(null);
+  const [listDay, setListDays] = useState([]);
+  const [listHours, setListHours] = useState([]);
+
+  useEffect(() => {
+    let today = new Date();
+    setSelectedYear(today.getFullYear());
+    setSelectedMonths(today.getMonth());
+    setSelectedDay(today.getDate());
+  }, []);
+
   const navigation = useNavigation();
+
   const handleCloseButton = () => {
     setShow(false);
   };
 
   const handleFinishClick = () => {};
+
+  const handleLeftDateClick = () => {
+    let mountDate = new Date(selectedYear, selectedMonth, 1);
+    mountDate.setMonth(mountDate.getMonth() - 1);
+    setSelectedYear(mountDate.getFullYear());
+    setSelectedMonths(mountDate.getMonth());
+    setSelectedDay(1);
+  };
+
+  const handleRightDateClick = () => {
+    let mountDate = new Date(selectedYear, selectedMonth, 1);
+    mountDate.setMonth(mountDate.getMonth() + 1);
+    setSelectedYear(mountDate.getFullYear());
+    setSelectedMonths(mountDate.getMonth());
+    setSelectedDay(1);
+  };
+
   return (
     <Modal transparent={true} visible={show} animationType="slide">
       <ModalArea>
@@ -152,13 +184,16 @@ export default ({show, setShow, user, service}) => {
           )}
           <ModalItem>
             <DateInfo>
-              <DatePrevArea>
+              <DatePrevArea onPress={handleLeftDateClick}>
                 <NavPrevIcon width="35" height="35" fill="#000" />
               </DatePrevArea>
               <DateTitleArea>
-                <DateTitle>Julho 2022</DateTitle>
+                <DateTitle>
+                  {months[selectedMonth]}
+                  {selectedYear}
+                </DateTitle>
               </DateTitleArea>
-              <DateNextArea>
+              <DateNextArea onPress={handleRightDateClick}>
                 <NavNextIcon width="35" height="35" fill="#000" />
               </DateNextArea>
             </DateInfo>
