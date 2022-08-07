@@ -105,6 +105,24 @@ const DateTitle = styled.Text`
 
 const DateList = styled.ScrollView``;
 
+const DateItem = styled.TouchableOpacity`
+  width: 45px;
+  justify-content: center;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+`;
+
+const DateItemWeekDay = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+const DateItemNumber = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
 const months = [
   'JANEIRO',
   'Fevereiro',
@@ -142,8 +160,8 @@ export default ({show, setShow, user, service}) => {
 
       month = month < 10 ? '0' + month : month;
       dy = dy < 10 ? '0' + dy : dy;
+      let selDate = `${year}-${month}-${dy}`;
 
-      let selDate = year + '-' + month + '-' + dy;
       let avaliabilitty = user.available.filter(e => e.date === selDate);
 
       newListDays.push({
@@ -153,6 +171,9 @@ export default ({show, setShow, user, service}) => {
       });
     }
     setListDays(newListDays);
+    setSelectedDay(1);
+    setListHours([]);
+    setSelectedHour(0);
   }, [selectedMonth, selectedYear]);
 
   useEffect(() => {
@@ -224,9 +245,14 @@ export default ({show, setShow, user, service}) => {
                 <NavNextIcon width="35" height="35" fill="#000" />
               </DateNextArea>
             </DateInfo>
-            <DateList
-              horizontal={true}
-              showHorizontalScrollIndicator={false}></DateList>
+            <DateList horizontal={true} showHorizontalScrollIndicator={false}>
+              {listDay.map((item, key) => (
+                <DateItem key={key} onPress={() => {}}>
+                  <DateItemWeekDay>{item.weekday}</DateItemWeekDay>
+                  <DateItemNumber>{item.number}</DateItemNumber>
+                </DateItem>
+              ))}
+            </DateList>
           </ModalItem>
           <FinishButton onPress={handleFinishClick}>
             <FinishButtonText>Finalizar Agendamento</FinishButtonText>
