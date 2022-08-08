@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import ExpandIcon from '../../assets/expand.svg';
@@ -108,6 +107,7 @@ const DateList = styled.ScrollView``;
 const DateItem = styled.TouchableOpacity`
   width: 45px;
   justify-content: center;
+  align-items: center;
   border-radius: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -147,34 +147,37 @@ export default ({show, setShow, user, service}) => {
   const [selectedHour, setSelectedHour] = useState(null);
   const [listDay, setListDays] = useState([]);
   const [listHours, setListHours] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    let daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
-    let newListDays = [];
+    if (user.available) {
+      let daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
+      let newListDays = [];
 
-    for (let i = 1; i < daysInMonth; i++) {
-      let day = new Date(selectedYear, selectedMonth, i);
-      let year = day.getFullYear();
-      let month = day.getMonth();
-      let dy = day.getDate();
+      for (let i = 1; i < daysInMonth; i++) {
+        let day = new Date(selectedYear, selectedMonth, i);
+        let year = day.getFullYear();
+        let month = day.getMonth();
+        let dy = day.getDate();
 
-      month = month < 10 ? '0' + month : month;
-      dy = dy < 10 ? '0' + dy : dy;
-      let selDate = `${year}-${month}-${dy}`;
+        month = month < 10 ? '0' + month : month;
+        dy = dy < 10 ? '0' + dy : dy;
+        let selDate = `${year}-${month}-${dy}`;
 
-      let avaliabilitty = user.available.filter(e => e.date === selDate);
+        let avaliabilitty = user.available.filter(e => e.date === selDate);
 
-      newListDays.push({
-        status: avaliabilitty.length > 0 ? true : false,
-        weekday: days[day.getDay()],
-        number: i,
-      });
+        newListDays.push({
+          status: avaliabilitty.length > 0 ? true : false,
+          weekday: days[day.getDay()],
+          number: i,
+        });
+      }
+      setListDays(newListDays);
+      setSelectedDay(1);
+      setListHours([]);
+      setSelectedHour(0);
     }
-    setListDays(newListDays);
-    setSelectedDay(1);
-    setListHours([]);
-    setSelectedHour(0);
-  }, [selectedMonth, selectedYear]);
+  }, [user, selectedMonth, selectedYear]);
 
   useEffect(() => {
     let today = new Date();
@@ -182,8 +185,6 @@ export default ({show, setShow, user, service}) => {
     setSelectedMonths(today.getMonth());
     setSelectedDay(today.getDate());
   }, []);
-
-  const navigation = useNavigation();
 
   const handleCloseButton = () => {
     setShow(false);
@@ -247,7 +248,10 @@ export default ({show, setShow, user, service}) => {
             </DateInfo>
             <DateList horizontal={true} showHorizontalScrollIndicator={false}>
               {listDay.map((item, key) => (
-                <DateItem key={key} onPress={() => {}}>
+                <DateItem
+                  key={key}
+                  onPress={() => {}}
+                  style={{opacity: item.status ? 1 : 0.5}}>
                   <DateItemWeekDay>{item.weekday}</DateItemWeekDay>
                   <DateItemNumber>{item.number}</DateItemNumber>
                 </DateItem>
