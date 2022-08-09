@@ -205,7 +205,7 @@ export default ({show, setShow, user, service}) => {
     mountDate.setMonth(mountDate.getMonth() + 1);
     setSelectedYear(mountDate.getFullYear());
     setSelectedMonths(mountDate.getMonth());
-    setSelectedDay(1);
+    setSelectedDay(0);
   };
 
   return (
@@ -250,9 +250,20 @@ export default ({show, setShow, user, service}) => {
               {listDay.map((item, key) => (
                 <DateItem
                   key={key}
-                  onPress={() => {}}
-                  style={{opacity: item.status ? 1 : 0.5}}>
-                  <DateItemWeekDay>{item.weekday}</DateItemWeekDay>
+                  onPress={() =>
+                    item.status ? setSelectedDay(item.number) : null
+                  }
+                  style={{
+                    opacity: item.status ? 1 : 0.5,
+                    backgroundColor:
+                      item.number === selectedDay ? '#4EADBE' : '#FFFF',
+                  }}>
+                  <DateItemWeekDay
+                    style={{
+                      color: item.number === selectedDay ? '#FFFF' : '#000',
+                    }}>
+                    {item.weekday}
+                  </DateItemWeekDay>
                   <DateItemNumber>{item.number}</DateItemNumber>
                 </DateItem>
               ))}
