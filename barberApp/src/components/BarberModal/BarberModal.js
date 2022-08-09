@@ -123,6 +123,20 @@ const DateItemNumber = styled.Text`
   font-weight: bold;
 `;
 
+const TimeList = styled.ScrollView``;
+
+const TimeItemText = styled.Text`
+  font-size: 16px;
+`;
+
+const TimeItem = styled.TouchableOpacity`
+  width: 75px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+`;
+
 const months = [
   'JANEIRO',
   'Fevereiro',
@@ -269,6 +283,17 @@ export default ({show, setShow, user, service}) => {
               ))}
             </DateList>
           </ModalItem>
+          {listHours.length > 0 && (
+            <ModalItem>
+              <TimeList horizontal={true} showHorizontalScrollIndicator={false}>
+                {listHours.map((item, key) => (
+                  <TimeItem key={key} onPress={() => {}}>
+                    <TimeItemText>{item}</TimeItemText>
+                  </TimeItem>
+                ))}
+              </TimeList>
+            </ModalItem>
+          )}
           <FinishButton onPress={handleFinishClick}>
             <FinishButtonText>Finalizar Agendamento</FinishButtonText>
           </FinishButton>
