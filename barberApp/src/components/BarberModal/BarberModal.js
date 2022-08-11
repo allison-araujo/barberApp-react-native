@@ -161,37 +161,26 @@ export default ({show, setShow, user, service}) => {
   const [selectedHour, setSelectedHour] = useState(null);
   const [listDay, setListDays] = useState([]);
   const [listHours, setListHours] = useState([]);
-  const navigation = useNavigation();
 
   useEffect(() => {
-    if (user.available) {
-      let daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
-      let newListDays = [];
+    if (user.available && selectedDay > 0) {
+      let day = new Date(selectedYear, selectedMonth, selectedDay);
+      let year = day.getFullYear();
+      let month = day.getMonth();
+      let dy = day.getDate();
 
-      for (let i = 1; i < daysInMonth; i++) {
-        let day = new Date(selectedYear, selectedMonth, i);
-        let year = day.getFullYear();
-        let month = day.getMonth();
-        let dy = day.getDate();
+      month = month < 10 ? '0' + month : month;
+      dy = dy < 10 ? '0' + dy : dy;
+      let selDate = `${year}-${month}-${dy}`;
 
-        month = month < 10 ? '0' + month : month;
-        dy = dy < 10 ? '0' + dy : dy;
-        let selDate = `${year}-${month}-${dy}`;
+      let avaliabilitty = user.available.filter(e => e.date === selDate);
 
-        let avaliabilitty = user.available.filter(e => e.date === selDate);
-
-        newListDays.push({
-          status: avaliabilitty.length > 0 ? true : false,
-          weekday: days[day.getDay()],
-          number: i,
-        });
+      if (avaliabilitty.length > 0) {
+        setListHours(avaliabilitty[0].hours);
       }
-      setListDays(newListDays);
-      setSelectedDay(1);
-      setListHours([]);
-      setSelectedHour(0);
     }
-  }, [user, selectedMonth, selectedYear]);
+    setSelectedHour(null);
+  }, [user, selectedDay]);
 
   useEffect(() => {
     let today = new Date();
@@ -287,8 +276,20 @@ export default ({show, setShow, user, service}) => {
             <ModalItem>
               <TimeList horizontal={true} showHorizontalScrollIndicator={false}>
                 {listHours.map((item, key) => (
-                  <TimeItem key={key} onPress={() => {}}>
-                    <TimeItemText>{item}</TimeItemText>
+                  <TimeItem
+                    key={key}
+                    onPress={() => setSelectedHour(item)}
+                    style={{
+                      backgroundColor:
+                        item === selectedHour ? '#4EADBE' : '#FFFF',
+                    }}>
+                    <TimeItemText
+                      style={{
+                        color: item === selectedHour ? '#FFFF' : '#000000',
+                        fontWeight: item === selectedHour ? 'bold' : 'normal',
+                      }}>
+                      {item}
+                    </TimeItemText>
                   </TimeItem>
                 ))}
               </TimeList>
